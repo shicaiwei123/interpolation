@@ -59,22 +59,37 @@ int main()
 {
 	float y;
 	setup();
-	float t = 1.1;
+	
 	//验证样本点
+	//float t=1.1
 	//for (int i = 0; i < 10; i++)
 	//{
 	//	y = Quadratic.getY(t);
 	//	t = t + 1;
 	//	uart1.printf("%.5f\r\n", y);
 	//}
+
+
 	//验证插值结果
-	for (int i = 1; i < 200; i++)
-	{
-		t += 0.05;
-		y = Quadratic.getY(t);
-		uart1.printf("%.5f\r\n", y);
-	}
-	PA8.toggle();
+	//float t = 1.1;
+	//for (int i = 1; i < 200; i++)
+	//{
+	//	t += 0.05;
+	//	y = Quadratic.getY(t);
+	//	uart1.printf("%.5f\r\n", y);
+	//}
+	//PA8.toggle();
+
+
+	//验证边界之外的插值结果
+	//float t = 0.1;
+	//for (int i = 1; i < 70; i++)
+	//{
+	//	t += 0.2;
+	//	y = Quadratic.getY(t);
+	//	uart1.printf("%.5f\r\n", y);
+	//}
+	//PA8.toggle();
 
 
 	return 0;

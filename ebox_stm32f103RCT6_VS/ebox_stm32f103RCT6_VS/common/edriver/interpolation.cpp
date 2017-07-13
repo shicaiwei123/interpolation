@@ -23,35 +23,49 @@ float *Interpolation::search(float x)
 	int mid = 0;
 	while (1)
 	{
-		mid = (low + high) / 2;
-		if (*(xaxis + mid) > x)
+		if (x <*(xaxis))  //如果x比最小值小
 		{
-			high = mid - 1;
-			if (*(xaxis + high) < x)
-			{
-				measureY = mid;
-				return xaxis + mid;
-				break;
-			}
+			measureY = 1;
+			return xaxis + 1;
 		}
-		else if (*(xaxis + mid) < x)
+
+		else if (x>*(xaxis + length - 1)) //如果x比最大值大
 		{
-			low = mid + 1;
-			if (*(xaxis + low) > x)
-			{
-				measureY = low;
-				return xaxis + low;
-				break;
-			}
+			measureY = length-1;
+			return xaxis + length - 1;
 		}
+
 		else
 		{
-			measureY = mid + 1;
-			return xaxis + mid + 1;
+			mid = (low + high) / 2;
+			if (*(xaxis + mid) > x)
+			{
+				high = mid - 1;
+				if (*(xaxis + high) < x)
+				{
+					measureY = mid;
+					return xaxis + mid;
+					break;
+				}
+			}
+			else if (*(xaxis + mid) < x)
+			{
+				low = mid + 1;
+				if (*(xaxis + low) > x)
+				{
+					measureY = low;
+					return xaxis + low;
+					break;
+				}
+			}
+			else
+			{
+				measureY = mid + 1;
+				return xaxis + mid + 1;
 
+			}
 		}
-
-
+		
 	}
 
 
@@ -130,7 +144,7 @@ float QuadraticInterpolation::getY(float x)
 		arrY[1] = *(--y1);
 		arrY[0] = *(--y1);
 	}
-	else if (j >= length - 2) //x在区间范围内,且下一个数是上界
+	else if (j >= length - 2) //x在区间范围内,且下一个数是上界或就是上界
 	{
 		arrX[2] = *(x1--);
 		arrX[1] = *(x1--);
