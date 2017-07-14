@@ -102,6 +102,16 @@ float LinearInterpolation::getY(float x)
 	x1 = search(x);
 	j = geyMeasureY();
 	y1 = y1 + j;
+	if (j > 1)              //不是下界
+	{
+		x3 = *x1--; x2 = *x1;
+		y3 = *y1--; y2 = *y1;
+	}
+	else                   //x是下界，插值点比最小值小,合理外推
+	{
+		x2 = *x1++; x3 = *x1;
+		y2 = *y1++; y3 = *y1;
+	}
 	x3 = *x1--; x2 = *x1;
 	y3 = *y1--; y2 = *y1;
 	k = (y3 - y2) / (x3 - x2);

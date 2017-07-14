@@ -2,8 +2,8 @@
 #include "my_math.h"
 #include "uart_vcan.h"
 #include "interpolation.h"
-//#define LinearInterpolationDebug
-#define  QuadraticInterpolationDebug
+#define LinearInterpolationDebug
+//#define  QuadraticInterpolationDebug
 #ifdef LinearInterpolationDebug
 float x[5] = { 1,2,3,4,5 };
 float y[5] = { 1,2,3,4,5 };
@@ -40,11 +40,21 @@ int main()
 	setup();
 	while (1)
 	{
-		float x = 1.4;
+		//验证线性插值
+		//float x = 1.4;
+		//for (int i = 0; i < 100; i++)
+		//{
+		//	y = liner.getY(x);
+		//	x += 0.01;
+		//	uart1.printf("%.3f\r\n", y);
+		//}
+
+		//验证合理外推
+		float x = -1;
 		for (int i = 0; i < 100; i++)
 		{
 			y = liner.getY(x);
-			x += 0.01;
+			x += 0.1;
 			uart1.printf("%.3f\r\n", y);
 		}
 		PA8.toggle();
