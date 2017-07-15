@@ -6,7 +6,7 @@
 //#define  QuadraticInterpolationDebug
 #ifdef LinearInterpolationDebug
 float x[5] = { 1,2,3,4,5 };
-float y[5] = { 1,2,3,4,5 };
+float y[5] = { 5,3,2,4,5 };
 int length = 5;
 FpsCounter fps;
 LinearInterpolation liner(x, y, length);
@@ -38,8 +38,8 @@ int main()
 	float y;
 
 	setup();
-	while (1)
-	{
+	//while (1)
+	//{
 		//验证线性插值
 		//float x = 1.4;
 		//for (int i = 0; i < 100; i++)
@@ -58,7 +58,7 @@ int main()
 			uart1.printf("%.3f\r\n", y);
 		}
 		PA8.toggle();
-	}
+	//}
 	return 1;
 
 }

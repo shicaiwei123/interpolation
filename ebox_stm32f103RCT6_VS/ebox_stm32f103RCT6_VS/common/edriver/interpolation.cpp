@@ -4,7 +4,7 @@ Interpolation::Interpolation(float *x, float *y, int n)
 	this->xaxis = x;
 	this->yaxis = y;
 	this->length = n;
-	measureY = 0;
+
 }
 
 void Interpolation::setSamplePoint(float *x, float *y, int n)
@@ -25,13 +25,13 @@ float *Interpolation::search(float x)
 	{
 		if (x <*(xaxis))  //如果x比最小值小
 		{
-			measureY = 1;
+
 			return xaxis + 1;
 		}
 
 		else if (x>*(xaxis + length - 1)) //如果x比最大值大
 		{
-			measureY = length-1;
+	
 			return xaxis + length - 1;
 		}
 
@@ -43,7 +43,7 @@ float *Interpolation::search(float x)
 				high = mid - 1;
 				if (*(xaxis + high) < x)
 				{
-					measureY = mid;
+		
 					return xaxis + mid;
 					break;
 				}
@@ -53,14 +53,13 @@ float *Interpolation::search(float x)
 				low = mid + 1;
 				if (*(xaxis + low) > x)
 				{
-					measureY = low;
+
 					return xaxis + low;
 					break;
 				}
 			}
 			else
 			{
-				measureY = mid + 1;
 				return xaxis + mid + 1;
 
 			}
@@ -70,12 +69,6 @@ float *Interpolation::search(float x)
 
 
 }
-
-int Interpolation::geyMeasureY(void)
-{
-	return measureY;
-}
-
 
 
 LinearInterpolation::LinearInterpolation(float *x, float *y, int n) :Interpolation(x, y, n)
@@ -100,18 +93,8 @@ float LinearInterpolation::getY(float x)
 	//	y1++;
 	//}
 	x1 = search(x);
-	j = geyMeasureY();
+	j = x1 - xaxis;
 	y1 = y1 + j;
-	if (j > 1)              //不是下界
-	{
-		x3 = *x1--; x2 = *x1;
-		y3 = *y1--; y2 = *y1;
-	}
-	else                   //x是下界，插值点比最小值小,合理外推
-	{
-		x2 = *x1++; x3 = *x1;
-		y2 = *y1++; y3 = *y1;
-	}
 	x3 = *x1--; x2 = *x1;
 	y3 = *y1--; y2 = *y1;
 	k = (y3 - y2) / (x3 - x2);
@@ -143,7 +126,7 @@ float QuadraticInterpolation::getY(float x)
 			   //	y1++;
 			   //}
 	x1 = search(x);
-	j = geyMeasureY();
+	j = x1 - xaxis;
 	y1 = y1 + j;
 	if (j < length - 2)//x在区间范围内,且下一个数不是边界
 	{

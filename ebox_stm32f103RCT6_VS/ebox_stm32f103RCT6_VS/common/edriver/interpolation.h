@@ -14,12 +14,10 @@ public:
 	//纯虚函数，获取插值后任意坐标下的值
 	virtual float getY(float x) = 0;
 	//获取measureY
-	int geyMeasureY(void);
 private:
 	float *xaxis;
 	float *yaxis;
 	int length;
-	int measureY;    //用来确定插值点对应的y值
 
 };
 
