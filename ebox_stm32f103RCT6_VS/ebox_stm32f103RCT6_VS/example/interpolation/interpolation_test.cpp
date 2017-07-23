@@ -131,27 +131,32 @@ int main()
 #endif
 
 
+
 #ifdef Interpolation2DDebug
-float x[4] = { 1,2 };
-float y[4] = { 1,2 };
-float z[16] = { 1,2,3,4 };
-int lengthx = 2;
-int lengthy = 2;
+float x[4] = { 1,2,3,4 };
+float y[4] = { 1,2,3,4 };
+//由随机数函数获取
+float z[16] = { 41.000,  67.000,  34.000,   0.000,
+69.000,  24.000,  78.000,  58.000,
+62.000,  64.000,   5.000,  45.000,
+81.000 , 27.000 , 61.000 , 91.000, };
+int lengthx = 4;
+int lengthy = 4;
 Interpolation2D Binary(x, y, z, lengthx, lengthy);
 int main()
 {
-	setup();
-	float t1 = 0.1, t2 = 0.1;
-	for (int i = 0; i < 22; i++)
+	//setup();
+	float t1 = 0.9, t2 = 0.9;
+	for (int i = 0; i <33; i++)
 	{
-		t2 = 0.1;
-		for (int j = 0; j < 22; j++)
+		t2 = 0.9;
+		for (int j = 0; j < 33; j++)
 		{
-			float fz = Binary.getZ(t1, t2);
-			uart1.printf("%8.3f", fz);
+			float fz = Binary.getZ(t2, t1);
+			printf("%8.3f", fz);
 			t2 += 0.1;
 		}
-		uart1.printf("\n");
+		printf("\n");
 		t1 += 0.1;
 	}
 	return 0;

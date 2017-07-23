@@ -250,7 +250,7 @@ float Interpolation2D::getZ(float x, float y)
 			xp = 0;
 		pointX[0] = (this->x + xp);
 		pointX[1] = pointX[0] + 1;
-		if (yp = -1)
+		if (yp == -1)
 			yp = 0;
 		pointY[0] = (this->y + yp);
 		pointY[1] = pointY[0] + 1;
